@@ -1,0 +1,24 @@
+{
+  "name": "multi-stage-build-docker-example",
+  "version": "1.0.0",
+  "description": "This is a very simple example the use of multi stage docker build that improve the docker's image size.",
+  "main": "dist/index.js",
+  "repository": "git@github.com:thiagoolsilva/multi-stage-build-docker-example.git",
+  "author": "Thiago lopes da silva <thiagoolsilva@gmail.com>",
+  "license": "Apache V2",
+  "private": true,
+  "scripts": {
+    "build": "./node_modules/.bin/tsc ",
+    "docker:build-clean": "yarn docker:build && yarn docker:clean-stage-build",
+    "docker:build": "docker build --file=./script/docker/dockerfile --tag=multi-stage-build .",
+    "docker:run": "docker run --rm -it multi-stage-build",
+    "docker:clean-stage-build": "docker image prune --force --filter label=stage=builder"
+  },
+  "devDependencies": {
+    "@types/uuid": "8.3.2",
+    "typescript": "4.4.3"
+  },
+  "dependencies": {
+    "uuid": "8.3.2"
+  }
+}
